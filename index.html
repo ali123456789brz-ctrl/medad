@@ -1,0 +1,1971 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="fa">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>مداد عدالت - موسسه حقوقی</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="backend_connect.js"></script>
+
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap');
+
+        * {
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        .gradient-bg {
+            background: #02646e;
+            box-shadow: 5px 2px 2px 2px rgb(100, 100, 100);
+        }
+
+        .justice-pattern {
+            background-image:
+                    radial-gradient(circle at 20% 50%, rgba(218, 165, 32, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(218, 165, 32, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 40% 80%, rgba(218, 165, 32, 0.1) 0%, transparent 50%);
+        }
+
+        .hover-lift {
+            transition: all 0.4s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(218, 165, 32, 0.3);
+        }
+
+        .pulse-gold {
+            animation: pulse-gold 2s infinite;
+        }
+
+        @keyframes pulse-gold {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(218, 165, 32, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(218, 165, 32, 0); }
+        }
+
+        .floating {
+            animation: floating 4s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+
+        .slide-in {
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .scale-in {
+            animation: scaleIn 0.8s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .gavel-swing {
+            animation: gavelSwing 3s ease-in-out infinite;
+            transform-origin: 80% 20%;
+        }
+
+        @keyframes gavelSwing {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(5deg); }
+        }
+
+        .chat-container {
+            height: 400px;
+            overflow-y: auto;
+        }
+
+        .chat-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-container::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        .chat-container::-webkit-scrollbar-thumb {
+            background: #daa520;
+            border-radius: 3px;
+        }
+
+        .message-bubble {
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+
+        .notification-badge {
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .online-status {
+            width: 12px;
+            height: 12px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+    </style>
+</head>
+<body class="text-white overflow-x-hidden" style="background-color: #007886;">
+<!-- Header -->
+<header class="gradient-bg border-b border-yellow-600/30 sticky top-0 z-50 backdrop-blur-sm">
+<div class="container mx-auto px-6 py-4">
+<nav class="flex items-center justify-between">
+<div class="flex items-center space-x-4 space-x-reverse">
+<div class="floating cursor-pointer" onclick="handleLogoClick()">
+<svg class="text-yellow-600" height="60" viewbox="0 0 120 120" width="60">
+<defs>
+<lineargradient id="logoGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#daa520"></stop>
+<stop offset="50%" style="stop-color:#ffd700"></stop>
+<stop offset="100%" style="stop-color:#b8860b"></stop>
+</lineargradient>
+</defs>
+<rect fill="url(#logoGrad)" height="25" width="10" x="55" y="90"></rect>
+<ellipse cx="60" cy="115" fill="url(#logoGrad)" rx="20" ry="3"></ellipse>
+<rect fill="url(#logoGrad)" height="70" width="4" x="58" y="20"></rect>
+<rect fill="url(#logoGrad)" height="4" width="60" x="30" y="28"></rect>
+<line stroke="url(#logoGrad)" stroke-width="2" x1="35" x2="35" y1="32" y2="45"></line>
+<path d="M25 45 Q35 50 45 45 L45 55 Q35 60 25 55 Z" fill="url(#logoGrad)" stroke="#fff" stroke-width="1"></path>
+<line stroke="url(#logoGrad)" stroke-width="2" x1="85" x2="85" y1="32" y2="45"></line>
+<path d="M75 45 Q85 50 95 45 L95 55 Q85 60 75 55 Z" fill="url(#logoGrad)" stroke="#fff" stroke-width="1"></path>
+<circle cx="60" cy="18" fill="url(#logoGrad)" r="6" stroke="#fff" stroke-width="1"></circle>
+</svg>
+</div>
+<div>
+<h1 class="text-3xl font-bold text-yellow-600">مداد عدالت</h1>
+<p class="text-sm text-gray-400">موسسه حقوقی</p>
+</div>
+</div>
+<div class="flex items-center space-x-6 space-x-reverse">
+<a class="text-gray-300 hover:text-yellow-600 transition-colors" href="#services">خدمات</a>
+<a class="text-gray-300 hover:text-yellow-600 transition-colors" href="#about">درباره ما</a>
+<a class="text-gray-300 hover:text-yellow-600 transition-colors" href="#contact">تماس</a>
+<button class="text-gray-300 hover:text-yellow-600 transition-colors" onclick="showMyTickets()">تیکت های من</button>
+<button class="text-gray-300 hover:text-yellow-600 transition-colors hidden" id="adminLoginBtn" onclick="showAdminLogin()">ورود ادمین</button>
+<button class="text-green-500 hover:text-green-400 transition-colors hidden" id="adminStatusBtn" onclick="logout()">
+<span class="flex items-center space-x-2 space-x-reverse">
+<div class="online-status"></div>
+<span>ورود ادمین</span>
+</span>
+</button>
+<button class="bg-gray-700 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors font-semibold mr-4" onclick="showAIChat()">
+                    🤖 مشاور هوشمند
+                </button>
+<button class="bg-yellow-600 hover:bg-yellow-700 text-black px-6 py-3 rounded-lg pulse-gold transition-colors font-semibold" onclick="showConsultationForm()">
+                    مشاوره آنلاین
+                </button>
+</div>
+</nav>
+</div>
+</header>
+<!-- Main Content -->
+<div class="min-h-screen justice-pattern">
+<!-- Home Page -->
+<div id="homePage">
+<!-- Hero Section -->
+<section class="py-32 relative overflow-hidden">
+<div class="container mx-auto px-6 relative z-10">
+<div class="grid lg:grid-cols-2 gap-16 items-center">
+<div class="slide-in">
+<h2 class="text-6xl font-bold mb-8 leading-tight">
+<span class="text-yellow-600">عدالت</span> را با
+                            <span class="text-yellow-600">مداد</span> بنویسید
+                        </h2>
+<p class="text-xl text-gray-300 mb-10 leading-relaxed">
+                            موسسه حقوقی مداد عدالت با بیش از ۱۵ سال تجربه، آماده ارائه خدمات حقوقی تخصصی و مشاوره در تمامی زمینه‌های حقوقی می‌باشد.
+                        </p>
+<div class="flex space-x-6 space-x-reverse">
+<button class="bg-yellow-600 hover:bg-yellow-700 text-black px-8 py-4 rounded-lg text-lg font-bold transition-all hover-lift pulse-gold" onclick="showConsultationForm()">
+                                مشاوره رایگان
+                            </button>
+<button class="bg-gray-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-bold transition-all hover-lift" onclick="showAIChat()">
+                                🤖 مشاور هوشمند
+                            </button>
+<button class="border-2 border-yellow-600 text-yellow-600 hover:bg-yellow-600 hover:text-black px-8 py-4 rounded-lg text-lg font-bold transition-all hover-lift">
+                                درباره ما
+                            </button>
+</div>
+</div>
+<div class="relative scale-in">
+<div class="absolute inset-0 bg-yellow-600/20 rounded-full blur-3xl"></div>
+<svg class="relative z-10 gavel-swing" height="500" viewbox="0 0 500 500" width="500">
+<defs>
+<lineargradient id="gavelGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#daa520"></stop>
+<stop offset="50%" style="stop-color:#ffd700"></stop>
+<stop offset="100%" style="stop-color:#b8860b"></stop>
+</lineargradient>
+<filter id="glow">
+<fegaussianblur result="coloredBlur" stddeviation="3"></fegaussianblur>
+<femerge>
+<femergenode in="coloredBlur"></femergenode>
+<femergenode in="SourceGraphic"></femergenode>
+</femerge>
+</filter>
+</defs>
+<!-- Gavel Handle -->
+<rect fill="url(#gavelGrad)" filter="url(#glow)" height="120" rx="10" width="20" x="200" y="350"></rect>
+<!-- Gavel Head -->
+<rect fill="url(#gavelGrad)" filter="url(#glow)" height="40" rx="20" width="120" x="150" y="320"></rect>
+<!-- Sound Block -->
+<rect fill="url(#gavelGrad)" filter="url(#glow)" height="30" rx="15" width="80" x="280" y="400"></rect>
+<!-- Justice Scales -->
+<line filter="url(#glow)" stroke="url(#gavelGrad)" stroke-width="8" x1="100" x2="400" y1="150" y2="150"></line>
+<line filter="url(#glow)" stroke="url(#gavelGrad)" stroke-width="6" x1="250" x2="250" y1="50" y2="200"></line>
+<!-- Left Scale -->
+<circle cx="150" cy="180" fill="none" filter="url(#glow)" r="40" stroke="url(#gavelGrad)" stroke-width="4"></circle>
+<line stroke="url(#gavelGrad)" stroke-width="3" x1="120" x2="180" y1="180" y2="180"></line>
+<!-- Right Scale -->
+<circle cx="350" cy="180" fill="none" filter="url(#glow)" r="40" stroke="url(#gavelGrad)" stroke-width="4"></circle>
+<line stroke="url(#gavelGrad)" stroke-width="3" x1="320" x2="380" y1="180" y2="180"></line>
+<!-- Decorative Elements -->
+<circle cx="250" cy="40" fill="url(#gavelGrad)" filter="url(#glow)" r="15"></circle>
+<path d="M235 25 L250 10 L265 25 Z" fill="url(#gavelGrad)" filter="url(#glow)"></path>
+</svg>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Section -->
+<section class="py-20 bg-gray-900/50" id="services">
+<div class="container mx-auto px-6">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-bold mb-4 text-yellow-600">خدمات ما</h2>
+<p class="text-xl text-gray-300">ارائه خدمات حقوقی تخصصی در تمامی زمینه‌ها</p>
+</div>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="bg-gray-800/50 rounded-2xl p-8 backdrop-blur-sm border border-yellow-600/30 hover-lift">
+<div class="text-4xl mb-6">⚖️</div>
+<h3 class="text-2xl font-bold mb-4 text-yellow-600">حقوق خانواده</h3>
+<p class="text-gray-300 mb-6">طلاق، نفقه، حضانت، تقسیم اموال و سایر مسائل خانوادگی</p>
+<ul class="text-sm text-gray-400 space-y-2">
+<li>• مشاوره طلاق توافقی</li>
+<li>• تنظیم قرارداد مهریه</li>
+<li>• دعاوی حضانت فرزندان</li>
+</ul>
+</div>
+<div class="bg-gray-800/50 rounded-2xl p-8 backdrop-blur-sm border border-yellow-600/30 hover-lift">
+<div class="text-4xl mb-6">🏢</div>
+<h3 class="text-2xl font-bold mb-4 text-yellow-600">حقوق تجاری</h3>
+<p class="text-gray-300 mb-6">ثبت شرکت، قراردادهای تجاری، ورشکستگی و اختلافات تجاری</p>
+<ul class="text-sm text-gray-400 space-y-2">
+<li>• ثبت انواع شرکت‌ها</li>
+<li>• تنظیم قراردادهای تجاری</li>
+<li>• حل اختلافات تجاری</li>
+</ul>
+</div>
+<div class="bg-gray-800/50 rounded-2xl p-8 backdrop-blur-sm border border-yellow-600/30 hover-lift">
+<div class="text-4xl mb-6">🏠</div>
+<h3 class="text-2xl font-bold mb-4 text-yellow-600">حقوق املاک</h3>
+<p class="text-gray-300 mb-6">خرید و فروش املاک، اجاره، مالکیت و اختلافات ملکی</p>
+<ul class="text-sm text-gray-400 space-y-2">
+<li>• تنظیم قراردادهای املاک</li>
+<li>• بررسی اسناد مالکیت</li>
+<li>• حل اختلافات ملکی</li>
+</ul>
+</div>
+<div class="bg-gray-800/50 rounded-2xl p-8 backdrop-blur-sm border border-yellow-600/30 hover-lift">
+<div class="text-4xl mb-6">⚡</div>
+<h3 class="text-2xl font-bold mb-4 text-yellow-600">حقوق جزا</h3>
+<p class="text-gray-300 mb-6">دفاع در دادگاه‌های کیفری، جرائم مالی و اقتصادی</p>
+<ul class="text-sm text-gray-400 space-y-2">
+<li>• دفاع در دادگاه کیفری</li>
+<li>• مشاوره جرائم اقتصادی</li>
+<li>• تنظیم لایحه دفاعیه</li>
+</ul>
+</div>
+<div class="bg-gray-800/50 rounded-2xl p-8 backdrop-blur-sm border border-yellow-600/30 hover-lift">
+<div class="text-4xl mb-6">👥</div>
+<h3 class="text-2xl font-bold mb-4 text-yellow-600">حقوق کار</h3>
+<p class="text-gray-300 mb-6">قراردادهای کار، اخراج، مزایا و اختلافات کارگری</p>
+<ul class="text-sm text-gray-400 space-y-2">
+<li>• تنظیم قراردادهای کار</li>
+<li>• دعاوی اخراج از کار</li>
+<li>• مطالبه مزایای کارگری</li>
+</ul>
+</div>
+<div class="bg-gray-800/50 rounded-2xl p-8 backdrop-blur-sm border border-yellow-600/30 hover-lift">
+<div class="text-4xl mb-6">🛡️</div>
+<h3 class="text-2xl font-bold mb-4 text-yellow-600">حقوق بیمه</h3>
+<p class="text-gray-300 mb-6">دعاوی بیمه، خسارات، تصادفات و مطالبات بیمه‌ای</p>
+<ul class="text-sm text-gray-400 space-y-2">
+<li>• مطالبه خسارات بیمه</li>
+<li>• دعاوی تصادفات</li>
+<li>• بررسی پلیس‌های بیمه</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section class="py-20" id="about">
+<div class="container mx-auto px-6">
+<div class="grid lg:grid-cols-2 gap-16 items-center">
+<div>
+<h2 class="text-4xl font-bold mb-8 text-yellow-600">درباره موسسه مداد عدالت</h2>
+<p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                            موسسه حقوقی مداد عدالت با بیش از ۱۵ سال سابقه درخشان در ارائه خدمات حقوقی، یکی از معتبرترین موسسات حقوقی کشور محسوب می‌شود.
+                        </p>
+<p class="text-lg text-gray-300 mb-8 leading-relaxed">
+                            ما با تیمی از وکلای مجرب و متخصص، آماده ارائه خدمات حقوقی در تمامی زمینه‌ها هستیم و همواره در تلاش برای دفاع از حقوق موکلین خود می‌باشیم.
+                        </p>
+<div class="grid md:grid-cols-2 gap-8">
+<div class="text-center">
+<div class="text-3xl font-bold text-yellow-600 mb-2">۱۵+</div>
+<div class="text-gray-300">سال تجربه</div>
+</div>
+<div class="text-center">
+<div class="text-3xl font-bold text-yellow-600 mb-2">۵۰۰+</div>
+<div class="text-gray-300">پرونده موفق</div>
+</div>
+<div class="text-center">
+<div class="text-3xl font-bold text-yellow-600 mb-2">۲۰+</div>
+<div class="text-gray-300">وکیل متخصص</div>
+</div>
+<div class="text-center">
+<div class="text-3xl font-bold text-yellow-600 mb-2">۹۸%</div>
+<div class="text-gray-300">رضایت موکلین</div>
+</div>
+</div>
+</div>
+<div class="relative">
+<div class="absolute inset-0 bg-yellow-600/20 rounded-3xl blur-3xl"></div>
+<div class="relative bg-gray-800/50 rounded-3xl p-8 backdrop-blur-sm border border-yellow-600/30">
+<h3 class="text-2xl font-bold mb-6 text-yellow-600">چرا مداد عدالت؟</h3>
+<div class="space-y-4">
+<div class="flex items-center space-x-4 space-x-reverse">
+<div class="w-8 h-8 bg-yellow-600 rounded-full flex items-center justify-center">
+<span class="text-black font-bold">✓</span>
+</div>
+<span class="text-gray-300">مشاوره رایگان اولیه</span>
+</div>
+<div class="flex items-center space-x-4 space-x-reverse">
+<div class="w-8 h-8 bg-yellow-600 rounded-full flex items-center justify-center">
+<span class="text-black font-bold">✓</span>
+</div>
+<span class="text-gray-300">وکلای مجرب و متخصص</span>
+</div>
+<div class="flex items-center space-x-4 space-x-reverse">
+<div class="w-8 h-8 bg-yellow-600 rounded-full flex items-center justify-center">
+<span class="text-black font-bold">✓</span>
+</div>
+<span class="text-gray-300">پیگیری مستمر پرونده</span>
+</div>
+<div class="flex items-center space-x-4 space-x-reverse">
+<div class="w-8 h-8 bg-yellow-600 rounded-full flex items-center justify-center">
+<span class="text-black font-bold">✓</span>
+</div>
+<span class="text-gray-300">شفافیت کامل در هزینه‌ها</span>
+</div>
+<div class="flex items-center space-x-4 space-x-reverse">
+<div class="w-8 h-8 bg-yellow-600 rounded-full flex items-center justify-center">
+<span class="text-black font-bold">✓</span>
+</div>
+<span class="text-gray-300">مشاوره آنلاین ۲۴ ساعته</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section class="py-20 bg-gray-900/50" id="contact">
+<div class="container mx-auto px-6">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-bold mb-4 text-yellow-600">تماس با ما</h2>
+<p class="text-xl text-gray-300">برای مشاوره رایگان با ما در تماس باشید</p>
+</div>
+<div class="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+<div class="space-y-8">
+<div class="flex items-center space-x-4 space-x-reverse">
+<div class="w-12 h-12 bg-yellow-600 rounded-full flex items-center justify-center">
+<svg class="w-6 h-6 text-black" fill="currentColor" viewbox="0 0 20 20">
+<path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+</svg>
+</div>
+<div>
+<h3 class="text-xl font-bold text-yellow-600">تلفن تماس</h3>
+<p class="text-gray-300">021-88776655</p>
+</div>
+</div>
+<div class="flex items-center space-x-4 space-x-reverse">
+<div class="w-12 h-12 bg-yellow-600 rounded-full flex items-center justify-center">
+<svg class="w-6 h-6 text-black" fill="currentColor" viewbox="0 0 20 20">
+<path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+<path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+</svg>
+</div>
+<div>
+<h3 class="text-xl font-bold text-yellow-600">ایمیل</h3>
+<p class="text-gray-300">info@medadedalat.ir</p>
+</div>
+</div>
+<div class="flex items-center space-x-4 space-x-reverse">
+<div class="w-12 h-12 bg-yellow-600 rounded-full flex items-center justify-center">
+<svg class="w-6 h-6 text-black" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" fill-rule="evenodd"></path>
+</svg>
+</div>
+<div>
+<h3 class="text-xl font-bold text-yellow-600">آدرس</h3>
+<p class="text-gray-300">Sabzevar</p>
+</div>
+</div>
+<div class="mt-8 p-6 bg-yellow-600/10 rounded-2xl border border-yellow-600/30">
+<h3 class="text-xl font-bold text-yellow-600 mb-4">مشاوره آنلاین</h3>
+<p class="text-gray-300 mb-4">برای دریافت مشاوره سریع و آنلاین از سیستم چت ما استفاده کنید</p>
+<button class="w-full bg-yellow-600 hover:bg-yellow-700 text-black py-3 rounded-lg font-bold transition-colors" onclick="showConsultationForm()">
+                                شروع مشاوره آنلاین
+                            </button>
+</div>
+</div>
+<form class="bg-gray-800/50 rounded-2xl p-8 backdrop-blur-sm border border-yellow-600/30" onsubmit="handleContactForm(event)">
+<div class="grid md:grid-cols-2 gap-6 mb-6">
+<div>
+<label class="block text-sm font-medium mb-3 text-yellow-600">نام</label>
+<input class="w-full bg-black/50 border border-gray-600 rounded-lg px-4 py-4 focus:border-yellow-600 focus:outline-none transition-colors text-white" required="" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium mb-3 text-yellow-600">تلفن</label>
+<input class="w-full bg-black/50 border border-gray-600 rounded-lg px-4 py-4 focus:border-yellow-600 focus:outline-none transition-colors text-white" required="" type="tel"/>
+</div>
+</div>
+<div class="mb-6">
+<label class="block text-sm font-medium mb-3 text-yellow-600">موضوع</label>
+<input class="w-full bg-black/50 border border-gray-600 rounded-lg px-4 py-4 focus:border-yellow-600 focus:outline-none transition-colors text-white" required="" type="text"/>
+</div>
+<div class="mb-6">
+<label class="block text-sm font-medium mb-3 text-yellow-600">پیام</label>
+<textarea class="w-full bg-black/50 border border-gray-600 rounded-lg px-4 py-4 focus:border-yellow-600 focus:outline-none transition-colors text-white" required="" rows="4"></textarea>
+</div>
+<button class="w-full bg-yellow-600 hover:bg-yellow-700 text-black py-4 rounded-lg font-bold text-lg transition-all hover-lift" type="submit">
+                            ارسال پیام
+                        </button>
+</form>
+</div>
+</div>
+</section>
+</div>
+<!-- My Tickets Modal -->
+<div class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center" id="myTicketsModal">
+<div class="bg-gray-900 rounded-2xl p-8 max-w-md w-full mx-4 border border-yellow-600/30">
+<div class="text-center mb-6">
+<h3 class="text-2xl font-bold text-yellow-600 mb-2">تیکت های من</h3>
+<p class="text-gray-400">شماره پیگیری تیکت خود را وارد کنید</p>
+</div>
+<form onsubmit="searchTicket(event)">
+<div class="space-y-4">
+<div>
+<label class="block text-sm font-medium mb-2 text-yellow-600">شماره پیگیری</label>
+<input class="w-full bg-black/50 border border-gray-600 rounded-lg px-4 py-3 focus:border-yellow-600 focus:outline-none transition-colors text-white" id="ticketSearchId" placeholder="مثال: 1703123456789" required="" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium mb-2 text-yellow-600">شماره تماس</label>
+<input class="w-full bg-black/50 border border-gray-600 rounded-lg px-4 py-3 focus:border-yellow-600 focus:outline-none transition-colors text-white" id="ticketSearchPhone" placeholder="شماره تماس خود را وارد کنید" required="" type="tel"/>
+</div>
+</div>
+<div class="flex space-x-4 space-x-reverse mt-6">
+<button class="flex-1 bg-yellow-600 hover:bg-yellow-700 text-black py-3 rounded-lg font-bold transition-colors" type="submit">
+                        جستجو
+                    </button>
+<button class="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-3 rounded-lg font-bold transition-colors" onclick="hideMyTickets()" type="button">
+                        انصراف
+                    </button>
+</div>
+</form>
+</div>
+</div>
+<!-- Admin Login Modal -->
+<div class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center" id="adminLoginModal">
+<div class="bg-gray-900 rounded-2xl p-8 max-w-md w-full mx-4 border border-yellow-600/30">
+<div class="text-center mb-6">
+<h3 class="text-2xl font-bold text-yellow-600 mb-2">ورود ادمین</h3>
+<p class="text-gray-400">برای دسترسی به پنل مدیریت وارد شوید</p>
+</div>
+<form onsubmit="handleAdminLogin(event)">
+<div class="space-y-4">
+<div>
+<label class="block text-sm font-medium mb-2 text-yellow-600">نام کاربری</label>
+<input class="w-full bg-black/50 border border-gray-600 rounded-lg px-4 py-3 focus:border-yellow-600 focus:outline-none transition-colors text-white" id="adminUsername" required="" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium mb-2 text-yellow-600">رمز عبور</label>
+<input class="w-full bg-black/50 border border-gray-600 rounded-lg px-4 py-3 focus:border-yellow-600 focus:outline-none transition-colors text-white" id="adminPassword" required="" type="password"/>
+</div>
+</div>
+<div class="flex space-x-4 space-x-reverse mt-6">
+<button class="flex-1 bg-yellow-600 hover:bg-yellow-700 text-black py-3 rounded-lg font-bold transition-colors" type="submit">
+                        ورود
+                    </button>
+<button class="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-3 rounded-lg font-bold transition-colors" onclick="hideAdminLogin()" type="button">
+                        انصراف
+                    </button>
+</div>
+</form>
+<div class="mt-4 p-3 bg-yellow-600/20 rounded-lg">
+<p class="text-sm text-yellow-600 text-center">
+<strong>Demo:</strong> admin / 123456
+                </p>
+</div>
+</div>
+</div>
+<!-- Consultation Form Modal -->
+<div class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center" id="consultationModal">
+<div class="bg-gray-900 rounded-2xl p-8 max-w-2xl w-full mx-4 border border-yellow-600/30 max-h-[90vh] overflow-y-auto">
+<div class="text-center mb-6">
+<h3 class="text-2xl font-bold text-yellow-600 mb-2">درخواست مشاوره رایگان</h3>
+<p class="text-gray-400">اطلاعات خود را وارد کنید تا با شما تماس بگیریم</p>
+</div>
+<form onsubmit="handleConsultationSubmit(event)">
+<div class="grid md:grid-cols-2 gap-6 mb-6">
+<div>
+<label class="block text-sm font-medium mb-3 text-yellow-600">نام و نام خانوادگی</label>
+<input class="w-full bg-black/50 border border-gray-600 rounded-lg px-4 py-4 focus:border-yellow-600 focus:outline-none transition-colors text-white" id="clientName" required="" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium mb-3 text-yellow-600">شماره تماس</label>
+<input class="w-full bg-black/50 border border-gray-600 rounded-lg px-4 py-4 focus:border-yellow-600 focus:outline-none transition-colors text-white" id="clientPhone" required="" type="tel"/>
+</div>
+</div>
+<div class="mb-6">
+<label class="block text-sm font-medium mb-3 text-yellow-600">نوع مسئله حقوقی</label>
+<select class="w-full bg-black/50 border border-gray-600 rounded-lg px-4 py-4 focus:border-yellow-600 focus:outline-none transition-colors text-white" id="caseType" required="">
+<option value="">انتخاب کنید...</option>
+<option value="family">حقوق خانواده</option>
+<option value="criminal">حقوق جزا</option>
+<option value="commercial">حقوق تجاری</option>
+<option value="real-estate">حقوق املاک</option>
+<option value="labor">حقوق کار</option>
+<option value="insurance">حقوق بیمه</option>
+<option value="other">سایر موارد</option>
+</select>
+</div>
+<div class="mb-6">
+<label class="block text-sm font-medium mb-3 text-yellow-600">شرح مسئله</label>
+<textarea class="w-full bg-black/50 border border-gray-600 rounded-lg px-4 py-4 focus:border-yellow-600 focus:outline-none transition-colors text-white" id="caseDescription" placeholder="لطفاً مسئله خود را به طور خلاصه شرح دهید..." required="" rows="4"></textarea>
+</div>
+<div class="flex space-x-4 space-x-reverse">
+<button class="flex-1 bg-yellow-600 hover:bg-yellow-700 text-black py-4 rounded-lg font-bold text-lg transition-all hover-lift" type="submit">
+                        ارسال درخواست
+                    </button>
+<button class="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-4 rounded-lg font-bold transition-colors" onclick="hideConsultationForm()" type="button">
+                        انصراف
+                    </button>
+</div>
+</form>
+</div>
+</div>
+<!-- Admin Panel -->
+<div class="hidden" id="adminPanel">
+<div class="container mx-auto px-6 py-8">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h2 class="text-3xl font-bold text-yellow-600">پنل مدیریت</h2>
+<p class="text-gray-400">مدیریت درخواست‌های مشاوره</p>
+</div>
+<div class="flex items-center space-x-4 space-x-reverse">
+<div class="flex items-center space-x-2 space-x-reverse">
+<div class="online-status"></div>
+<span class="text-green-500 text-sm">آنلاین</span>
+</div>
+<button class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors" onclick="logout()">
+                        خروج
+                    </button>
+</div>
+</div>
+<div class="grid lg:grid-cols-3 gap-8">
+<!-- Consultation Requests -->
+<div class="lg:col-span-1">
+<div class="bg-gray-900/60 rounded-2xl p-6 border border-yellow-600/30 backdrop-blur-sm">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold text-yellow-600">درخواست‌های مشاوره</h3>
+<span class="bg-yellow-600 text-black px-3 py-1 rounded-full text-sm font-bold" id="requestCount">0</span>
+</div>
+<div class="space-y-4 max-h-96 overflow-y-auto" id="consultationRequests">
+<!-- Requests will be populated here -->
+</div>
+</div>
+</div>
+<!-- Chat Area -->
+<div class="lg:col-span-2">
+<div class="bg-gray-900/60 rounded-2xl border border-yellow-600/30 backdrop-blur-sm hidden" id="chatArea">
+<div class="p-6 border-b border-gray-700">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-4 space-x-reverse">
+<div class="w-12 h-12 bg-yellow-600 rounded-full flex items-center justify-center text-black font-bold">
+<span id="clientInitials"></span>
+</div>
+<div>
+<h4 class="font-bold text-yellow-600" id="clientNameDisplay"></h4>
+<p class="text-sm text-gray-400" id="clientCaseType"></p>
+</div>
+</div>
+<div class="flex items-center space-x-4 space-x-reverse">
+<div class="flex items-center space-x-2 space-x-reverse">
+<div class="online-status"></div>
+<span class="text-green-500 text-sm">آنلاین</span>
+</div>
+<button class="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg transition-colors" onclick="closeTicket(currentChatId)">
+                                        بستن تیکت
+                                    </button>
+</div>
+</div>
+</div>
+<div class="chat-container p-6 space-y-4" id="chatMessages">
+<!-- Messages will be populated here -->
+</div>
+<div class="p-6 border-t border-gray-700">
+<form class="flex space-x-4 space-x-reverse" onsubmit="sendAdminMessage(event)">
+<input class="flex-1 bg-black/50 border border-gray-600 rounded-lg px-4 py-3 focus:border-yellow-600 focus:outline-none transition-colors text-white" id="adminMessageInput" placeholder="پیام خود را بنویسید..." type="text"/>
+<button class="bg-yellow-600 hover:bg-yellow-700 text-black px-6 py-3 rounded-lg font-bold transition-colors" type="submit">
+                                    ارسال
+                                </button>
+</form>
+</div>
+</div>
+<div class="bg-gray-900/60 rounded-2xl p-12 border border-yellow-600/30 backdrop-blur-sm text-center" id="noChatSelected">
+<div class="text-6xl mb-4">💬</div>
+<h3 class="text-xl font-bold text-yellow-600 mb-2">هیچ چتی انتخاب نشده</h3>
+<p class="text-gray-400">برای شروع چت، یکی از درخواست‌های مشاوره را انتخاب کنید</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Ticket Success Modal -->
+<div class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center" id="ticketSuccessModal">
+<div class="bg-gray-900 rounded-2xl p-8 max-w-md w-full mx-4 border border-yellow-600/30">
+<div class="text-center">
+<div class="text-6xl mb-4">✅</div>
+<h3 class="text-2xl font-bold text-yellow-600 mb-4">تیکت با موفقیت ثبت شد!</h3>
+<div class="bg-yellow-600/20 rounded-lg p-6 mb-6 border border-yellow-600/50">
+<p class="text-yellow-600 font-bold mb-2">شماره پیگیری شما:</p>
+<div class="bg-black/50 rounded-lg p-4 mb-4">
+<span class="text-2xl font-mono text-white" id="ticketSuccessId"></span>
+</div>
+<button class="bg-yellow-600 hover:bg-yellow-700 text-black px-4 py-2 rounded-lg font-bold transition-colors mb-2" onclick="copyTicketId()">
+                        📋 کپی شماره پیگیری
+                    </button>
+<p class="text-sm text-yellow-400">این شماره را برای پیگیری نگه دارید</p>
+</div>
+<div class="text-right mb-6 space-y-2 text-sm text-gray-300">
+<p>✓ تیکت شما در سیستم ثبت شد</p>
+<p>✓ وکیل مشاور به زودی پاسخ خواهد داد</p>
+<p>✓ از منوی "تیکت های من" پیگیری کنید</p>
+</div>
+<div class="flex space-x-4 space-x-reverse">
+<button class="flex-1 bg-yellow-600 hover:bg-yellow-700 text-black py-3 rounded-lg font-bold transition-colors" onclick="startChatFromSuccess()">
+                        شروع چت
+                    </button>
+<button class="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-3 rounded-lg font-bold transition-colors" onclick="hideTicketSuccess()">
+                        بستن
+                    </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Ticket Details Modal -->
+<div class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center" id="ticketDetailsModal">
+<div class="bg-gray-900 rounded-2xl p-8 max-w-2xl w-full mx-4 border border-yellow-600/30 max-h-[90vh] overflow-y-auto">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h3 class="text-2xl font-bold text-yellow-600 mb-2">جزئیات تیکت</h3>
+<p class="text-gray-400" id="ticketDetailsId"></p>
+</div>
+<button class="text-gray-400 hover:text-white transition-colors" onclick="hideTicketDetails()">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+<div class="bg-gray-800/50 rounded-lg p-6 mb-6">
+<div class="grid md:grid-cols-2 gap-4 mb-4">
+<div>
+<span class="text-yellow-600 font-medium">نام:</span>
+<span class="text-white mr-2" id="ticketDetailsName"></span>
+</div>
+<div>
+<span class="text-yellow-600 font-medium">تاریخ ثبت:</span>
+<span class="text-white mr-2" id="ticketDetailsDate"></span>
+</div>
+<div>
+<span class="text-yellow-600 font-medium">نوع مسئله:</span>
+<span class="text-white mr-2" id="ticketDetailsCaseType"></span>
+</div>
+<div>
+<span class="text-yellow-600 font-medium">وضعیت:</span>
+<span class="mr-2" id="ticketDetailsStatus"></span>
+</div>
+</div>
+<div>
+<span class="text-yellow-600 font-medium">شرح مسئله:</span>
+<p class="text-gray-300 mt-2 leading-relaxed" id="ticketDetailsDescription"></p>
+</div>
+</div>
+<div class="bg-gray-800/50 rounded-lg p-6">
+<h4 class="text-lg font-bold text-yellow-600 mb-4">پیام‌ها</h4>
+<div class="space-y-4 max-h-60 overflow-y-auto mb-4" id="ticketMessagesContainer">
+<!-- Messages will be populated here -->
+</div>
+<div class="hidden" id="ticketChatForm">
+<form class="flex space-x-4 space-x-reverse" onsubmit="sendTicketMessage(event)">
+<input class="flex-1 bg-black/50 border border-gray-600 rounded-lg px-4 py-3 focus:border-yellow-600 focus:outline-none transition-colors text-white" id="ticketMessageInput" placeholder="پیام خود را بنویسید..." type="text"/>
+<button class="bg-yellow-600 hover:bg-yellow-700 text-black px-6 py-3 rounded-lg font-bold transition-colors" type="submit">
+                            ارسال
+                        </button>
+</form>
+</div>
+<div class="hidden text-center text-red-400 py-4" id="ticketClosedMessage">
+<p>این تیکت بسته شده است و امکان ارسال پیام جدید وجود ندارد.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- AI Chat Modal -->
+<div class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center" id="aiChatModal">
+<div class="bg-gray-900 rounded-2xl max-w-4xl w-full mx-4 border border-blue-600/30 max-h-[90vh] flex flex-col">
+<!-- Header -->
+<div class="p-6 border-b border-gray-700 flex items-center justify-between">
+<div class="flex items-center space-x-4 space-x-reverse">
+<div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                        🤖
+                    </div>
+<div>
+<h3 class="text-2xl font-bold text-blue-400">مشاور هوشمند حقوقی</h3>
+<p class="text-gray-400">پاسخ فوری به سوالات حقوقی شما</p>
+</div>
+</div>
+<button class="text-gray-400 hover:text-white transition-colors" onclick="hideAIChat()">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+<!-- Quick Questions -->
+<div class="p-6 border-b border-gray-700" id="aiQuickQuestions">
+<h4 class="text-lg font-bold text-blue-400 mb-4">سوالات پرتکرار:</h4>
+<div class="grid md:grid-cols-2 gap-3">
+<button class="text-right bg-gray-800 hover:bg-gray-700 p-3 rounded-lg transition-colors text-sm" onclick="askAI('چگونه می‌توانم درخواست طلاق توافقی بدهم؟')">
+                        چگونه درخواست طلاق توافقی بدهم؟
+                    </button>
+<button class="text-right bg-gray-800 hover:bg-gray-700 p-3 rounded-lg transition-colors text-sm" onclick="askAI('مراحل ثبت شرکت چیست؟')">
+                        مراحل ثبت شرکت چیست؟
+                    </button>
+<button class="text-right bg-gray-800 hover:bg-gray-700 p-3 rounded-lg transition-colors text-sm" onclick="askAI('حقوق کارگر اخراج شده چیست؟')">
+                        حقوق کارگر اخراج شده چیست؟
+                    </button>
+<button class="text-right bg-gray-800 hover:bg-gray-700 p-3 rounded-lg transition-colors text-sm" onclick="askAI('چگونه از خسارت تصادف شکایت کنم؟')">
+                        چگونه از خسارت تصادف شکایت کنم؟
+                    </button>
+<button class="text-right bg-gray-800 hover:bg-gray-700 p-3 rounded-lg transition-colors text-sm" onclick="askAI('قرارداد اجاره چه نکاتی باید داشته باشد؟')">
+                        قرارداد اجاره چه نکاتی باید داشته باشد؟
+                    </button>
+<button class="text-right bg-gray-800 hover:bg-gray-700 p-3 rounded-lg transition-colors text-sm" onclick="askAI('چگونه وصیت‌نامه بنویسم؟')">
+                        چگونه وصیت‌نامه بنویسم؟
+                    </button>
+</div>
+</div>
+<!-- Chat Messages -->
+<div class="flex-1 p-6 overflow-y-auto max-h-96" id="aiChatMessages">
+<div class="text-center text-gray-400 py-8">
+<div class="text-4xl mb-4">🤖</div>
+<h4 class="text-xl font-bold text-blue-400 mb-2">سلام! من مشاور هوشمند حقوقی هستم</h4>
+<p class="mb-4">می‌توانم به سوالات حقوقی شما پاسخ دهم. سوال خود را بپرسید یا از سوالات پیشنهادی استفاده کنید.</p>
+<div class="bg-blue-600/20 rounded-lg p-4 border border-blue-600/50">
+<p class="text-sm text-blue-400">
+                            ⚠️ توجه: این پاسخ‌ها جنبه راهنمایی دارند و جایگزین مشاوره حقوقی تخصصی نیستند.
+                        </p>
+</div>
+</div>
+</div>
+<!-- Input -->
+<div class="p-6 border-t border-gray-700">
+<form class="flex space-x-4 space-x-reverse" onsubmit="sendAIMessage(event)">
+<input class="flex-1 bg-black/50 border border-gray-600 rounded-lg px-4 py-3 focus:border-blue-600 focus:outline-none transition-colors text-white" id="aiMessageInput" placeholder="سوال حقوقی خود را بپرسید..." type="text"/>
+<button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-bold transition-colors" type="submit">
+                        ارسال
+                    </button>
+</form>
+<div class="mt-4 text-center">
+<button class="text-yellow-600 hover:text-yellow-500 text-sm transition-colors" onclick="showConsultationForm(); hideAIChat();">
+                        برای مشاوره تخصصی با وکیل کلیک کنید
+                    </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Client Chat Panel -->
+<div class="hidden" id="clientChatPanel">
+<div class="container mx-auto px-6 py-8">
+<div class="max-w-4xl mx-auto">
+<div class="bg-gray-900/60 rounded-2xl border border-yellow-600/30 backdrop-blur-sm">
+<div class="p-6 border-b border-gray-700">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-4 space-x-reverse">
+<div class="w-12 h-12 bg-yellow-600 rounded-full flex items-center justify-center text-black font-bold">
+                                    وک
+                                </div>
+<div>
+<h4 class="font-bold text-yellow-600">وکیل مشاور</h4>
+<p class="text-sm text-gray-400">آماده پاسخگویی</p>
+</div>
+</div>
+<div class="flex items-center space-x-4 space-x-reverse">
+<div class="flex items-center space-x-2 space-x-reverse">
+<div class="online-status"></div>
+<span class="text-green-500 text-sm">آنلاین</span>
+</div>
+<button class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors" onclick="endClientChat()">
+                                    پایان چت
+                                </button>
+</div>
+</div>
+</div>
+<div class="chat-container p-6 space-y-4" id="clientChatMessages">
+<!-- Messages will be populated here -->
+</div>
+<div class="p-6 border-t border-gray-700">
+<form class="flex space-x-4 space-x-reverse" onsubmit="sendClientMessage(event)">
+<input class="flex-1 bg-black/50 border border-gray-600 rounded-lg px-4 py-3 focus:border-yellow-600 focus:outline-none transition-colors text-white" id="clientMessageInput" placeholder="سوال خود را بپرسید..." type="text"/>
+<button class="bg-yellow-600 hover:bg-yellow-700 text-black px-6 py-3 rounded-lg font-bold transition-colors" type="submit">
+                                ارسال
+                            </button>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer class="bg-gray-900 border-t border-yellow-600/30 py-12">
+<div class="container mx-auto px-6">
+<div class="grid md:grid-cols-4 gap-8">
+<div>
+<div class="flex items-center space-x-4 space-x-reverse mb-6">
+<svg class="text-yellow-600" height="40" viewbox="0 0 120 120" width="40">
+<defs>
+<lineargradient id="footerLogoGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#daa520"></stop>
+<stop offset="50%" style="stop-color:#ffd700"></stop>
+<stop offset="100%" style="stop-color:#b8860b"></stop>
+</lineargradient>
+</defs>
+<rect fill="url(#footerLogoGrad)" height="25" width="10" x="55" y="90"></rect>
+<ellipse cx="60" cy="115" fill="url(#footerLogoGrad)" rx="20" ry="3"></ellipse>
+<rect fill="url(#footerLogoGrad)" height="70" width="4" x="58" y="20"></rect>
+<rect fill="url(#footerLogoGrad)" height="4" width="60" x="30" y="28"></rect>
+<line stroke="url(#footerLogoGrad)" stroke-width="2" x1="35" x2="35" y1="32" y2="45"></line>
+<path d="M25 45 Q35 50 45 45 L45 55 Q35 60 25 55 Z" fill="url(#footerLogoGrad)" stroke="#fff" stroke-width="1"></path>
+<line stroke="url(#footerLogoGrad)" stroke-width="2" x1="85" x2="85" y1="32" y2="45"></line>
+<path d="M75 45 Q85 50 95 45 L95 55 Q85 60 75 55 Z" fill="url(#footerLogoGrad)" stroke="#fff" stroke-width="1"></path>
+<circle cx="60" cy="18" fill="url(#footerLogoGrad)" r="6" stroke="#fff" stroke-width="1"></circle>
+</svg>
+<h3 class="text-xl font-bold text-yellow-600">مداد عدالت</h3>
+</div>
+<p class="text-gray-400 leading-relaxed">
+                    موسسه حقوقی مداد عدالت، همراه شما در مسیر دفاع از حقوق و عدالت
+                </p>
+</div>
+<div>
+<h4 class="text-lg font-bold text-yellow-600 mb-4">خدمات</h4>
+<ul class="space-y-2 text-gray-400">
+<li>حقوق خانواده</li>
+<li>حقوق تجاری</li>
+<li>حقوق املاک</li>
+<li>حقوق جزا</li>
+</ul>
+</div>
+<div>
+<h4 class="text-lg font-bold text-yellow-600 mb-4">دسترسی سریع</h4>
+<ul class="space-y-2 text-gray-400">
+<li><a class="hover:text-yellow-600 transition-colors" href="#about">درباره ما</a></li>
+<li><a class="hover:text-yellow-600 transition-colors" href="#services">خدمات</a></li>
+<li><a class="hover:text-yellow-600 transition-colors" href="#contact">تماس با ما</a></li>
+<li><button class="hover:text-yellow-600 transition-colors" onclick="showConsultationForm()">مشاوره آنلاین</button></li>
+</ul>
+</div>
+<div>
+<h4 class="text-lg font-bold text-yellow-600 mb-4">تماس با ما</h4>
+<div class="space-y-2 text-gray-400">
+<p>📞 021-88776655</p>
+<p>✉️ info@medadedalat.ir</p>
+<p>📍SAbzevar </p>
+</div>
+</div>
+</div>
+<div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+<p>© 1404 موسسه حقوقی مداد عدالت. تمامی حقوق محفوظ است.</p>
+<p></p>
+</div>
+</div>
+</footer>
+<script>
+    let consultationRequests = [];
+    let currentChatId = null;
+    let currentClientId = null;
+    let currentTicketId = null;
+    let isAdmin = false;
+    let chatMessages = {};
+    let aiChatMessages = [];
+    let isAITyping = false;
+
+    const aiKnowledgeBase = {
+        'طلاق': {
+            keywords: ['طلاق', 'جدایی', 'توافقی', 'مهریه', 'نفقه'],
+            response: `**طلاق توافقی:**
+
+📋 **مراحل طلاق توافقی:**
+1. توافق زوجین بر طلاق
+2. تعیین مهریه و نفقه
+3. توافق روی حضانت فرزندان
+4. مراجعه به دفتر ازدواج
+5. تنظیم صورتجلسه طلاق
+
+💰 **نکات مهم:**
+• مهریه باید پرداخت شود
+• نفقه عده باید تعیین شود
+• تقسیم اموال مشترک
+• حضانت فرزندان زیر 7 سال با مادر
+
+⚖️ **مدارک لازم:**
+• شناسنامه زوجین
+• سند ازدواج
+• کارت ملی
+• عکس شناسایی
+
+⚠️ **توجه:** این راهنمایی کلی است. برای مشاوره دقیق با وکیل تماس بگیرید.`
+        },
+        'شرکت': {
+            keywords: ['شرکت', 'ثبت', 'تاسیس', 'مسئولیت محدود', 'سهامی'],
+            response: `**ثبت شرکت:**
+
+🏢 **انواع شرکت:**
+• شرکت با مسئولیت محدود
+• شرکت سهامی خاص
+• شرکت تضامنی
+• شرکت مختلط غیر سهامی
+
+📋 **مراحل ثبت:**
+1. انتخاب نام شرکت
+2. تهیه اساسنامه
+3. تودیع سرمایه
+4. ثبت در اداره ثبت شرکت‌ها
+5. دریافت شناسه ملی
+
+💼 **مدارک لازم:**
+• اساسنامه شرکت
+• فیش واریزی سرمایه
+• کپی شناسنامه شرکا
+• تصویب صورتجلسه تاسیس
+
+💰 **هزینه‌ها:**
+• حق الثبت
+• هزینه آگهی
+• حق تمبر
+• هزینه وکیل (اختیاری)
+
+⏱️ **مدت زمان:** معمولاً 2-3 هفته`
+        },
+        'کار': {
+            keywords: ['کار', 'اخراج', 'حقوق', 'کارگر', 'کارفرما', 'قرارداد کار'],
+            response: `**حقوق کار:**
+
+👷 **حقوق کارگر اخراج شده:**
+• حقوق و مزایای معوقه
+• عیدی و پاداش
+• مرخصی استحقاقی
+• سنوات خدمت
+• بیمه بیکاری
+
+📋 **انواع اخراج:**
+• اخراج توافقی
+• اخراج تادیبی
+• اخراج اقتصادی
+• پایان قرارداد موقت
+
+⚖️ **حقوق قانونی:**
+• 45 روز حقوق برای هر سال کار
+• پرداخت کلیه مطالبات
+• گواهی کار
+• بیمه نامه
+
+🚫 **اخراج غیرقانونی:**
+• بازگشت به کار
+• پرداخت حقوق از دست رفته
+• خسارت معنوی
+
+📞 **مراجع شکایت:**
+• اداره کار
+• هیات حل اختلاف
+• دادگاه کار`
+        },
+        'تصادف': {
+            keywords: ['تصادف', 'خسارت', 'بیمه', 'شکایت', 'دیه'],
+            response: `**تصادفات و خسارات:**
+
+🚗 **انواع خسارت:**
+• خسارت جانی
+• خسارت مالی
+• خسارت معنوی
+• هزینه درمان
+
+📋 **مراحل شکایت:**
+1. تهیه گزارش پلیس
+2. مراجعه به بیمه
+3. ارزیابی خسارت
+4. تقاضای غرامت
+5. شکایت قضایی (در صورت نیاز)
+
+💰 **محاسبه دیه:**
+• دیه کامل: 100 شتر
+• دیه اعضا بر اساس جدول
+• خسارت مالی: ارزش روز
+
+🏥 **هزینه درمان:**
+• هزینه‌های پزشکی
+• فیزیوتراپی
+• دارو و تجهیزات
+• مراقبت در منزل
+
+⚖️ **مدارک لازم:**
+• گزارش پلیس
+• پرونده پزشکی
+• فیش‌های هزینه
+• نظریه پزشکی قانونی`
+        },
+        'اجاره': {
+            keywords: ['اجاره', 'قرارداد', 'مستاجر', 'موجر', 'ودیعه'],
+            response: `**قرارداد اجاره:**
+
+📋 **نکات مهم قرارداد:**
+• مشخصات کامل طرفین
+• مدت اجاره
+• میزان اجاره و ودیعه
+• نحوه افزایش اجاره
+• تعهدات طرفین
+
+💰 **ودیعه:**
+• حداکثر 5 برابر اجاره ماهانه
+• سپرده در حساب بانکی
+• بازگشت در پایان قرارداد
+
+📈 **افزایش اجاره:**
+• سالانه حداکثر 25%
+• بر اساس نرخ تورم
+• با توافق طرفین
+
+🏠 **تعهدات موجر:**
+• تحویل ملک سالم
+• انجام تعمیرات اساسی
+• پرداخت عوارض شهرداری
+
+👤 **تعهدات مستاجر:**
+• پرداخت اجاره به موقع
+• حفظ و نگهداری ملک
+• عدم تغییر کاربری
+
+⚖️ **فسخ قرارداد:**
+• عدم پرداخت اجاره
+• تخلف از شرایط قرارداد
+• نیاز موجر به ملک`
+        },
+        'وصیت': {
+            keywords: ['وصیت', 'وصیت‌نامه', 'ارث', 'میراث', 'وراثت'],
+            response: `**وصیت‌نامه:**
+
+📜 **انواع وصیت:**
+• وصیت رسمی (دفترخانه)
+• وصیت عادی (دستنویس)
+• وصیت شفاهی (شرایط خاص)
+
+✍️ **شرایط وصیت‌نامه:**
+• بالغ و عاقل بودن
+• اختیار کامل
+• عدم اکراه
+• رعایت سهم الارث
+
+📋 **محتویات وصیت:**
+• مشخصات کامل موصی
+• تعیین وصی
+• نحوه تقسیم اموال
+• دستورات خاص
+
+💰 **محدودیت‌ها:**
+• حداکثر 1/3 اموال
+• عدم محرومیت وراث
+• رعایت حقوق زوج/زوجه
+
+⚖️ **اجرای وصیت:**
+• تایید دادگاه
+• حضور وراث
+• تقسیم طبق وصیت
+• ثبت در اسناد رسمی
+
+📝 **نکات مهم:**
+• امضا و اثر انگشت
+• تاریخ دقیق
+• شاهد (در صورت نیاز)
+• نگهداری در مکان امن`
+        }
+    };
+
+    function initApp() {
+        loadConsultationRequests();
+        updateRequestCount();
+        updateAdminUI();
+    }
+
+    let logoClickCount = 0;
+    let logoClickTimer = null;
+
+    function handleLogoClick() {
+        logoClickCount++;
+
+        if (logoClickTimer) {
+            clearTimeout(logoClickTimer);
+        }
+
+        logoClickTimer = setTimeout(() => {
+            if (logoClickCount >= 3) {
+                showAdminLogin();
+            }
+            logoClickCount = 0;
+        }, 1000);
+    }
+
+    function handleContactForm(event) {
+        event.preventDefault();
+        alert('پیام شما با موفقیت ارسال شد. به زودی با شما تماس خواهیم گرفت.');
+        event.target.reset();
+    }
+
+    function showAdminLogin() {
+        document.getElementById('adminLoginModal').classList.remove('hidden');
+    }
+
+    function hideAdminLogin() {
+        document.getElementById('adminLoginModal').classList.add('hidden');
+    }
+
+    function handleAdminLogin(event) {
+        event.preventDefault();
+        const username = document.getElementById('adminUsername').value;
+        const password = document.getElementById('adminPassword').value;
+
+        if (username === 'admin' && password === '123456') {
+            isAdmin = true;
+            hideAdminLogin();
+            showAdminPanel();
+            loadConsultationRequests();
+            updateAdminUI();
+        } else {
+            alert('نام کاربری یا رمز عبور اشتباه است');
+        }
+    }
+
+    function logout() {
+        isAdmin = false;
+        currentChatId = null;
+        currentClientId = null;
+        showHomePage();
+        updateAdminUI();
+    }
+
+    function updateAdminUI() {
+        const adminLoginBtn = document.getElementById('adminLoginBtn');
+        const adminStatusBtn = document.getElementById('adminStatusBtn');
+
+        if (isAdmin) {
+            adminLoginBtn.classList.add('hidden');
+            adminStatusBtn.classList.remove('hidden');
+        } else {
+            adminLoginBtn.classList.add('hidden');
+            adminStatusBtn.classList.add('hidden');
+        }
+    }
+
+    function showMyTickets() {
+        document.getElementById('myTicketsModal').classList.remove('hidden');
+    }
+
+    function hideMyTickets() {
+        document.getElementById('myTicketsModal').classList.add('hidden');
+        document.getElementById('ticketSearchId').value = '';
+        document.getElementById('ticketSearchPhone').value = '';
+    }
+
+    function searchTicket(event) {
+        event.preventDefault();
+
+        const ticketId = document.getElementById('ticketSearchId').value.trim();
+        const phone = document.getElementById('ticketSearchPhone').value.trim();
+
+        loadConsultationRequests();
+
+        const ticket = consultationRequests.find(r =>
+            r.id.toString() === ticketId && r.phone === phone
+        );
+
+        if (ticket) {
+            hideMyTickets();
+            showTicketDetails(ticket);
+        } else {
+            alert('تیکت با این مشخصات یافت نشد.\nلطفاً شماره پیگیری و شماره تماس را بررسی کنید.');
+        }
+    }
+
+    function showTicketDetails(ticket) {
+        currentTicketId = ticket.id;
+
+        document.getElementById('ticketDetailsId').textContent = `شماره پیگیری: ${ticket.id}`;
+        document.getElementById('ticketDetailsName').textContent = ticket.name;
+        document.getElementById('ticketDetailsDate').textContent = ticket.timestamp;
+        document.getElementById('ticketDetailsCaseType').textContent = ticket.caseType;
+        document.getElementById('ticketDetailsDescription').textContent = ticket.description;
+
+        const statusElement = document.getElementById('ticketDetailsStatus');
+        const statusText = ticket.status === 'closed' ? 'بسته شده' : ticket.status === 'active' ? 'فعال' : 'در انتظار';
+        const statusClass = ticket.status === 'closed' ? 'text-red-400' : ticket.status === 'active' ? 'text-green-400' : 'text-yellow-400';
+        statusElement.textContent = statusText;
+        statusElement.className = `mr-2 ${statusClass}`;
+
+        loadTicketMessages();
+
+        if (ticket.status === 'closed') {
+            document.getElementById('ticketChatForm').classList.add('hidden');
+            document.getElementById('ticketClosedMessage').classList.remove('hidden');
+        } else {
+            document.getElementById('ticketChatForm').classList.remove('hidden');
+            document.getElementById('ticketClosedMessage').classList.add('hidden');
+        }
+
+        document.getElementById('ticketDetailsModal').classList.remove('hidden');
+    }
+
+    function hideTicketDetails() {
+        document.getElementById('ticketDetailsModal').classList.add('hidden');
+        currentTicketId = null;
+    }
+
+    function loadTicketMessages() {
+        const container = document.getElementById('ticketMessagesContainer');
+        container.innerHTML = '';
+
+        if (!currentTicketId || !chatMessages[currentTicketId]) {
+            container.innerHTML = `
+                    <div class="text-center text-gray-400 py-4">
+                        <div class="text-2xl mb-2">💬</div>
+                        <p class="text-sm">هنوز پیامی ارسال نشده است</p>
+                    </div>
+                `;
+            return;
+        }
+
+        const messages = chatMessages[currentTicketId];
+        messages.forEach(msg => {
+            const messageElement = document.createElement('div');
+            messageElement.className = `flex ${msg.sender === 'system' ? 'justify-center' : msg.sender === 'client' ? 'justify-end' : 'justify-start'}`;
+
+            messageElement.innerHTML = `
+                    <div class="message-bubble ${msg.sender === 'system' ? 'bg-red-600/20 border border-red-600/50 text-red-400 text-center' : msg.sender === 'client' ? 'bg-yellow-600 text-black' : 'bg-gray-700 text-white'} rounded-lg px-4 py-3">
+                        <p class="mb-1">${msg.message}</p>
+                        <p class="text-xs opacity-70">${msg.timestamp}</p>
+                    </div>
+                `;
+
+            container.appendChild(messageElement);
+        });
+
+        container.scrollTop = container.scrollHeight;
+    }
+
+    function sendTicketMessage(event) {
+        event.preventDefault();
+        const input = document.getElementById('ticketMessageInput');
+        const message = input.value.trim();
+
+        if (!message || !currentTicketId) return;
+
+        const ticket = consultationRequests.find(r => r.id === currentTicketId);
+        if (ticket && ticket.status === 'closed') {
+            alert('این تیکت بسته شده است و امکان ارسال پیام وجود ندارد.');
+            return;
+        }
+
+        const messageObj = {
+            id: Date.now(),
+            sender: 'client',
+            message: message,
+            timestamp: new Date().toLocaleString('fa-IR'),
+            read: false
+        };
+
+        if (!chatMessages[currentTicketId]) {
+            chatMessages[currentTicketId] = [];
+        }
+
+        chatMessages[currentTicketId].push(messageObj);
+        saveChatMessages();
+        loadTicketMessages();
+        input.value = '';
+    }
+
+    function showConsultationForm() {
+        document.getElementById('consultationModal').classList.remove('hidden');
+    }
+
+    function hideConsultationForm() {
+        document.getElementById('consultationModal').classList.add('hidden');
+    }
+
+    function handleConsultationSubmit(event) {
+        event.preventDefault();
+
+        const name = document.getElementById('clientName').value;
+        const phone = document.getElementById('clientPhone').value;
+        const caseType = document.getElementById('caseType').value;
+        const description = document.getElementById('caseDescription').value;
+
+        const caseTypeMap = {
+            'family': 'حقوق خانواده',
+            'criminal': 'حقوق جزا',
+            'commercial': 'حقوق تجاری',
+            'real-estate': 'حقوق املاک',
+            'labor': 'حقوق کار',
+            'insurance': 'حقوق بیمه',
+            'other': 'سایر موارد'
+        };
+
+        const request = {
+            id: Date.now(),
+            name: name,
+            phone: phone,
+            caseType: caseTypeMap[caseType],
+            description: description,
+            timestamp: new Date().toLocaleString('fa-IR'),
+            status: 'pending'
+        };
+
+        consultationRequests.push(request);
+        saveConsultationRequests();
+
+        chatMessages[request.id] = [];
+        saveChatMessages();
+
+        hideConsultationForm();
+        showTicketSuccess(request.id);
+
+        currentClientId = request.id;
+        showClientChat();
+
+        event.target.reset();
+
+        if (isAdmin) {
+            loadConsultationRequests();
+        }
+    }
+
+    function showHomePage() {
+        document.getElementById('homePage').classList.remove('hidden');
+        document.getElementById('adminPanel').classList.add('hidden');
+        document.getElementById('clientChatPanel').classList.add('hidden');
+    }
+
+    function showAdminPanel() {
+        document.getElementById('homePage').classList.add('hidden');
+        document.getElementById('adminPanel').classList.remove('hidden');
+        document.getElementById('clientChatPanel').classList.add('hidden');
+    }
+
+    function showClientChat() {
+        document.getElementById('homePage').classList.add('hidden');
+        document.getElementById('adminPanel').classList.add('hidden');
+        document.getElementById('clientChatPanel').classList.remove('hidden');
+        loadClientChatMessages();
+    }
+
+    function saveConsultationRequests() {
+        localStorage.setItem('consultationRequests', JSON.stringify(consultationRequests));
+    }
+
+    function loadConsultationRequests() {
+        const saved = localStorage.getItem('consultationRequests');
+        if (saved) {
+            consultationRequests = JSON.parse(saved);
+        }
+        if (isAdmin) {
+            displayConsultationRequests();
+        }
+        updateRequestCount();
+    }
+
+    function saveChatMessages() {
+        localStorage.setItem('chatMessages', JSON.stringify(chatMessages));
+    }
+
+    function loadChatMessages() {
+        const saved = localStorage.getItem('chatMessages');
+        if (saved) {
+            chatMessages = JSON.parse(saved);
+        }
+    }
+
+    function displayConsultationRequests() {
+        const container = document.getElementById('consultationRequests');
+        container.innerHTML = '';
+
+        if (consultationRequests.length === 0) {
+            container.innerHTML = `
+                    <div class="text-center text-gray-400 py-8">
+                        <div class="text-4xl mb-2">📝</div>
+                        <p>هیچ درخواست مشاوره‌ای وجود ندارد</p>
+                    </div>
+                `;
+            return;
+        }
+
+        consultationRequests.forEach(request => {
+            const requestElement = document.createElement('div');
+            requestElement.className = `bg-black/50 rounded-lg p-4 border border-gray-600 hover:border-yellow-600 transition-colors cursor-pointer ${currentChatId === request.id ? 'border-yellow-600 bg-yellow-600/10' : ''}`;
+            requestElement.onclick = () => startChat(request.id);
+
+            const hasNewMessages = chatMessages[request.id] && chatMessages[request.id].some(msg => msg.sender === 'client' && !msg.read);
+
+            requestElement.innerHTML = `
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="font-bold text-yellow-600">${request.name}</h4>
+                        ${hasNewMessages ? '<div class="w-3 h-3 bg-red-500 rounded-full notification-badge"></div>' : ''}
+                    </div>
+                    <p class="text-sm text-gray-400 mb-2">${request.caseType}</p>
+                    <p class="text-xs text-gray-500 mb-2">${request.phone}</p>
+                    <p class="text-sm text-gray-300 mb-2 line-clamp-2">${request.description}</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-gray-500">${request.timestamp}</span>
+                        <span class="text-xs px-2 py-1 rounded-full ${request.status === 'closed' ? 'bg-red-600 text-white' : request.status === 'active' ? 'bg-green-600 text-white' : 'bg-yellow-600 text-black'}">${request.status === 'closed' ? 'بسته شده' : request.status === 'active' ? 'فعال' : 'در انتظار'}</span>
+                    </div>
+                `;
+
+            container.appendChild(requestElement);
+        });
+    }
+
+    function updateRequestCount() {
+        const countElement = document.getElementById('requestCount');
+        if (countElement) {
+            countElement.textContent = consultationRequests.length;
+        }
+    }
+
+    function startChat(requestId) {
+        const request = consultationRequests.find(r => r.id === requestId);
+        if (!request) return;
+
+        if (request.status === 'closed') {
+            alert('این تیکت بسته شده است و امکان ادامه چت وجود ندارد.');
+            return;
+        }
+
+        currentChatId = requestId;
+        if (request.status === 'pending') {
+            request.status = 'active';
+        }
+        saveConsultationRequests();
+
+        document.getElementById('noChatSelected').classList.add('hidden');
+        document.getElementById('chatArea').classList.remove('hidden');
+
+        const initials = request.name.split(' ').map(n => n[0]).join('');
+        document.getElementById('clientInitials').textContent = initials;
+        document.getElementById('clientNameDisplay').textContent = request.name;
+        document.getElementById('clientCaseType').textContent = request.caseType;
+
+        loadChatMessages();
+        displayChatMessages();
+        displayConsultationRequests();
+
+        if (chatMessages[requestId]) {
+            chatMessages[requestId].forEach(msg => {
+                if (msg.sender === 'client') {
+                    msg.read = true;
+                }
+            });
+            saveChatMessages();
+        }
+    }
+
+    function sendAdminMessage(event) {
+        event.preventDefault();
+        const input = document.getElementById('adminMessageInput');
+        const message = input.value.trim();
+
+        if (!message || !currentChatId) return;
+
+        const request = consultationRequests.find(r => r.id === currentChatId);
+        if (request && request.status === 'closed') {
+            alert('این تیکت بسته شده است و امکان ارسال پیام وجود ندارد.');
+            return;
+        }
+
+        const messageObj = {
+            id: Date.now(),
+            sender: 'admin',
+            message: message,
+            timestamp: new Date().toLocaleString('fa-IR'),
+            read: false
+        };
+
+        if (!chatMessages[currentChatId]) {
+            chatMessages[currentChatId] = [];
+        }
+
+        chatMessages[currentChatId].push(messageObj);
+        saveChatMessages();
+        displayChatMessages();
+        input.value = '';
+
+        const chatContainer = document.getElementById('chatMessages');
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    function sendClientMessage(event) {
+        event.preventDefault();
+        const input = document.getElementById('clientMessageInput');
+        const message = input.value.trim();
+
+        if (!message || !currentClientId) return;
+
+        const messageObj = {
+            id: Date.now(),
+            sender: 'client',
+            message: message,
+            timestamp: new Date().toLocaleString('fa-IR'),
+            read: false
+        };
+
+        if (!chatMessages[currentClientId]) {
+            chatMessages[currentClientId] = [];
+        }
+
+        chatMessages[currentClientId].push(messageObj);
+        saveChatMessages();
+        loadClientChatMessages();
+        input.value = '';
+
+        const chatContainer = document.getElementById('clientChatMessages');
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    function displayChatMessages() {
+        const container = document.getElementById('chatMessages');
+        container.innerHTML = '';
+
+        if (!currentChatId || !chatMessages[currentChatId]) {
+            container.innerHTML = `
+                    <div class="text-center text-gray-400 py-8">
+                        <div class="text-4xl mb-2">💬</div>
+                        <p>هنوز پیامی ارسال نشده است</p>
+                        <p class="text-sm mt-2">اولین پیام را ارسال کنید</p>
+                    </div>
+                `;
+            return;
+        }
+
+        const messages = chatMessages[currentChatId];
+        messages.forEach(msg => {
+            const messageElement = document.createElement('div');
+            messageElement.className = `flex ${msg.sender === 'system' ? 'justify-center' : msg.sender === 'admin' ? 'justify-end' : 'justify-start'}`;
+
+            messageElement.innerHTML = `
+                    <div class="message-bubble ${msg.sender === 'system' ? 'bg-red-600/20 border border-red-600/50 text-red-400 text-center' : msg.sender === 'admin' ? 'bg-yellow-600 text-black' : 'bg-gray-700 text-white'} rounded-lg px-4 py-3">
+                        <p class="mb-1">${msg.message}</p>
+                        <p class="text-xs opacity-70">${msg.timestamp}</p>
+                    </div>
+                `;
+
+            container.appendChild(messageElement);
+        });
+
+        container.scrollTop = container.scrollHeight;
+    }
+
+    function loadClientChatMessages() {
+        const container = document.getElementById('clientChatMessages');
+        container.innerHTML = '';
+
+        if (!currentClientId || !chatMessages[currentClientId]) {
+            container.innerHTML = `
+                    <div class="text-center text-gray-400 py-8">
+                        <div class="text-4xl mb-2">👋</div>
+                        <p>سلام! چطور می‌توانم کمکتان کنم؟</p>
+                        <p class="text-sm mt-2">سوال خود را بپرسید</p>
+                    </div>
+                `;
+            return;
+        }
+
+        const messages = chatMessages[currentClientId];
+        messages.forEach(msg => {
+            const messageElement = document.createElement('div');
+            messageElement.className = `flex ${msg.sender === 'system' ? 'justify-center' : msg.sender === 'client' ? 'justify-end' : 'justify-start'}`;
+
+            messageElement.innerHTML = `
+                    <div class="message-bubble ${msg.sender === 'system' ? 'bg-red-600/20 border border-red-600/50 text-red-400 text-center' : msg.sender === 'client' ? 'bg-yellow-600 text-black' : 'bg-gray-700 text-white'} rounded-lg px-4 py-3">
+                        <p class="mb-1">${msg.message}</p>
+                        <p class="text-xs opacity-70">${msg.timestamp}</p>
+                    </div>
+                `;
+
+            container.appendChild(messageElement);
+        });
+
+        container.scrollTop = container.scrollHeight;
+    }
+
+    function endClientChat() {
+        if (confirm('آیا مطمئن هستید که می‌خواهید چت را پایان دهید؟')) {
+            currentClientId = null;
+            showHomePage();
+        }
+    }
+
+    function closeTicket(requestId) {
+        if (!requestId) return;
+
+        if (confirm('آیا مطمئن هستید که می‌خواهید این تیکت را ببندید؟\nپس از بستن تیکت، امکان ادامه چت وجود نخواهد داشت.')) {
+            const request = consultationRequests.find(r => r.id === requestId);
+            if (request) {
+                request.status = 'closed';
+                request.closedAt = new Date().toLocaleString('fa-IR');
+
+                if (!chatMessages[requestId]) {
+                    chatMessages[requestId] = [];
+                }
+
+                chatMessages[requestId].push({
+                    id: Date.now(),
+                    sender: 'system',
+                    message: 'تیکت توسط ادمین بسته شد. از مشاوره با ما متشکریم.',
+                    timestamp: new Date().toLocaleString('fa-IR'),
+                    read: true
+                });
+
+                saveConsultationRequests();
+                saveChatMessages();
+
+                displayConsultationRequests();
+                displayChatMessages();
+
+                alert('تیکت با موفقیت بسته شد.');
+            }
+        }
+    }
+
+    let currentSuccessTicketId = null;
+
+    function showTicketSuccess(ticketId) {
+        currentSuccessTicketId = ticketId;
+        document.getElementById('ticketSuccessId').textContent = ticketId;
+        document.getElementById('ticketSuccessModal').classList.remove('hidden');
+    }
+
+    function hideTicketSuccess() {
+        document.getElementById('ticketSuccessModal').classList.add('hidden');
+        currentSuccessTicketId = null;
+    }
+
+    function copyTicketId() {
+        const ticketId = document.getElementById('ticketSuccessId').textContent;
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(ticketId).then(() => {
+                alert('شماره پیگیری کپی شد!');
+            }).catch(() => {
+                fallbackCopyTextToClipboard(ticketId);
+            });
+        } else {
+            fallbackCopyTextToClipboard(ticketId);
+        }
+    }
+
+    function fallbackCopyTextToClipboard(text) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.top = "0";
+        textArea.style.left = "0";
+        textArea.style.position = "fixed";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+            document.execCommand('copy');
+            alert('شماره پیگیری کپی شد!');
+        } catch (err) {
+            alert('خطا در کپی کردن. لطفاً دستی کپی کنید: ' + text);
+        }
+
+        document.body.removeChild(textArea);
+    }
+
+    function startChatFromSuccess() {
+        if (currentSuccessTicketId) {
+            currentClientId = currentSuccessTicketId;
+            hideTicketSuccess();
+            showClientChat();
+        }
+    }
+
+    function showAIChat() {
+        document.getElementById('aiChatModal').classList.remove('hidden');
+        if (aiChatMessages.length === 0) {
+            displayAIWelcome();
+        }
+    }
+
+    function hideAIChat() {
+        document.getElementById('aiChatModal').classList.add('hidden');
+    }
+
+    function displayAIWelcome() {
+        const container = document.getElementById('aiChatMessages');
+        container.innerHTML = `
+                <div class="text-center text-gray-400 py-8">
+                    <div class="text-4xl mb-4">🤖</div>
+                    <h4 class="text-xl font-bold text-blue-400 mb-2">سلام! من مشاور هوشمند حقوقی هستم</h4>
+                    <p class="mb-4">می‌توانم به سوالات حقوقی شما پاسخ دهم. سوال خود را بپرسید یا از سوالات پیشنهادی استفاده کنید.</p>
+                    <div class="bg-blue-600/20 rounded-lg p-4 border border-blue-600/50">
+                        <p class="text-sm text-blue-400">
+                            ⚠️ توجه: این پاسخ‌ها جنبه راهنمایی دارند و جایگزین مشاوره حقوقی تخصصی نیستند.
+                        </p>
+                    </div>
+                </div>
+            `;
+    }
+
+    function askAI(question) {
+        document.getElementById('aiMessageInput').value = question;
+        sendAIMessage(new Event('submit'));
+    }
+
+    function sendAIMessage(event) {
+        event.preventDefault();
+        const input = document.getElementById('aiMessageInput');
+        const question = input.value.trim();
+
+        if (!question || isAITyping) return;
+
+        aiChatMessages.push({
+            sender: 'user',
+            message: question,
+            timestamp: new Date().toLocaleString('fa-IR')
+        });
+
+        input.value = '';
+        displayAIChatMessages();
+
+        showAITyping();
+
+        setTimeout(() => {
+            const response = generateAIResponse(question);
+            aiChatMessages.push({
+                sender: 'ai',
+                message: response,
+                timestamp: new Date().toLocaleString('fa-IR')
+            });
+
+            hideAITyping();
+            displayAIChatMessages();
+        }, 1500 + Math.random() * 1000); 
+    }
+
+    function generateAIResponse(question) {
+        const questionLower = question.toLowerCase();
+
+        for (const [topic, data] of Object.entries(aiKnowledgeBase)) {
+            if (data.keywords.some(keyword => questionLower.includes(keyword))) {
+                return data.response;
+            }
+        }
+
+        if (questionLower.includes('قانون') || questionLower.includes('حقوق')) {
+            return `**پاسخ کلی:**
+
+متأسفانه سوال شما در حوزه‌های تخصصی موجود در سیستم نیست.
+
+🔍 **حوزه‌های تخصصی من:**
+• حقوق خانواده (طلاق، مهریه، حضانت)
+• حقوق تجاری (ثبت شرکت، قراردادها)
+• حقوق کار (اخراج، حقوق کارگری)
+• حقوق املاک (اجاره، خرید و فروش)
+• تصادفات و خسارات
+• وصیت و میراث
+
+💡 **پیشنهاد:**
+برای مشاوره تخصصی در این زمینه، لطفاً با وکلای ما تماس بگیرید.
+
+📞 **تماس فوری:** 021-88776655`;
+        }
+
+        if (questionLower.includes('سلام') || questionLower.includes('درود')) {
+            return `سلام و درود! 👋
+
+خوش آمدید به سیستم مشاوره هوشمند موسسه حقوقی مداد عدالت.
+
+🤖 **من چه کمکی می‌توانم بکنم؟**
+• پاسخ به سوالات حقوقی عمومی
+• راهنمایی در مورد مراحل قانونی
+• معرفی خدمات موسسه
+• ارجاع به وکیل متخصص
+
+سوال خود را بپرسید یا از دکمه‌های پیشنهادی استفاده کنید! 😊`;
+        }
+
+        if (questionLower.includes('هزینه') || questionLower.includes('قیمت')) {
+            return `**هزینه‌های حقوقی:**
+
+💰 **عوامل تأثیرگذار:**
+• پیچیدگی پرونده
+• زمان مورد نیاز
+• نوع خدمات حقوقی
+• مرحله قضایی
+
+📋 **خدمات رایگان:**
+• مشاوره اولیه (30 دقیقه)
+• بررسی اولیه پرونده
+• راهنمایی تلفنی
+
+💼 **خدمات با هزینه:**
+• وکالت در دادگاه
+• تنظیم قراردادها
+• پیگیری پرونده
+
+📞 **برای دریافت برآورد دقیق:**
+تماس بگیرید: 021-88776655`;
+        }
+
+        return `متأسفانه نتوانستم سوال شما را به درستی درک کنم. 🤔
+
+💡 **پیشنهادات:**
+• سوال خود را واضح‌تر بپرسید
+• از کلمات کلیدی استفاده کنید
+• از سوالات پیشنهادی بالا استفاده کنید
+
+🔍 **مثال‌هایی از سوالات مناسب:**
+• "چگونه طلاق بگیرم؟"
+• "مراحل ثبت شرکت چیست؟"
+• "حقوق کارگر اخراج شده چیست؟"
+
+📞 **برای مشاوره تخصصی:**
+با وکلای ما تماس بگیرید: 021-88776655`;
+    }
+
+    function showAITyping() {
+        isAITyping = true;
+        const container = document.getElementById('aiChatMessages');
+
+        const typingElement = document.createElement('div');
+        typingElement.id = 'aiTypingIndicator';
+        typingElement.className = 'flex justify-start mb-4';
+        typingElement.innerHTML = `
+                <div class="bg-gray-700 text-white rounded-lg px-4 py-3 max-w-xs">
+                    <div class="flex items-center space-x-2 space-x-reverse">
+                        <div class="w-2 h-2 bg-blue-400 rounded-full animate-bounce"></div>
+                        <div class="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                        <div class="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                        <span class="text-sm text-gray-300 mr-2">در حال تایپ...</span>
+                    </div>
+                </div>
+            `;
+
+        container.appendChild(typingElement);
+        container.scrollTop = container.scrollHeight;
+    }
+
+    function hideAITyping() {
+        isAITyping = false;
+        const typingElement = document.getElementById('aiTypingIndicator');
+        if (typingElement) {
+            typingElement.remove();
+        }
+    }
+
+    function displayAIChatMessages() {
+        const container = document.getElementById('aiChatMessages');
+
+        if (aiChatMessages.length === 0) {
+            displayAIWelcome();
+            return;
+        }
+
+        container.innerHTML = '';
+
+        aiChatMessages.forEach(msg => {
+            const messageElement = document.createElement('div');
+            messageElement.className = `flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'} mb-4`;
+
+            const messageContent = msg.message.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            const formattedMessage = messageContent.replace(/\n/g, '<br>');
+
+            messageElement.innerHTML = `
+                    <div class="message-bubble ${msg.sender === 'user' ? 'bg-blue-600 text-white' : 'bg-gray-700 text-white'} rounded-lg px-4 py-3 max-w-2xl">
+                        <div class="mb-1 leading-relaxed">${formattedMessage}</div>
+                        <p class="text-xs opacity-70">${msg.timestamp}</p>
+                    </div>
+                `;
+
+            container.appendChild(messageElement);
+        });
+
+        container.scrollTop = container.scrollHeight;
+
+        if (aiChatMessages.length > 0) {
+            document.getElementById('aiQuickQuestions').style.display = 'none';
+        }
+    }
+
+    window.addEventListener('load', function() {
+        initApp();
+        loadChatMessages();
+    });
+
+    setInterval(() => {
+        if (isAdmin) {
+            loadConsultationRequests();
+            if (currentChatId) {
+                displayChatMessages();
+            }
+        }
+        if (currentClientId) {
+            loadClientChatMessages();
+        }
+    }, 3000);
+</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9829353667b4a401',t:'MTc1ODQ1Mzk4OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script src="backend_connect.js"></script></body>
+</html>
